@@ -1,0 +1,16 @@
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/build/CMakeFiles/rebuild_cache.dir
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/build/CMakeFiles/test.dir
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/build/CMakeFiles/edit_cache.dir
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/build/src/CMakeFiles/rebuild_cache.dir
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/build/src/CMakeFiles/edit_cache.dir
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/build/src/CMakeFiles/test.dir
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/build/src/CMakeFiles/anpi.dir
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/build/src/CMakeFiles/tarea04.dir
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/build/test/CMakeFiles/rebuild_cache.dir
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/build/test/CMakeFiles/edit_cache.dir
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/build/test/CMakeFiles/tester.dir
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/build/test/CMakeFiles/test.dir
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/build/benchmarks/CMakeFiles/rebuild_cache.dir
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/build/benchmarks/CMakeFiles/edit_cache.dir
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/build/benchmarks/CMakeFiles/benchmark.dir
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/build/benchmarks/CMakeFiles/test.dir
