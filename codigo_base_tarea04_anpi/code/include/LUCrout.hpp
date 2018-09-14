@@ -28,12 +28,27 @@ namespace anpi {
    * is composed by 1's.
    */
   template<typename T>
-  void unpackCrout(const Matrix<T>& LU,
-                   Matrix<T>& L,
-                   Matrix<T>& U) {
-
-    throw anpi::Exception("To be implemented yet");
-
+  void unpackCrout(const Matrix<T>& LU,Matrix<T>& L,Matrix<T>& U) {
+    if ((LU.cols()==LU.rows())&&(L.cols()==L.rows())&&
+        (U.cols()==U.rows())  &&(LU.cols()==L.cols())&&
+        (LU.cols()==U.cols())){ //square Matrix (LU, L and U).
+      for(unsigned int i=0;i<LU.cols();++i){
+        for(unsigned int j=0;j<LU.cols();++j){
+          if(i<j){ //Save on Upper matrix and store a zero on Lower matrix
+            U[i][j] = LU[i][j];
+            L[i][j] = T(0);
+          }else{
+            if(i>j){ //Save on Lower matrix and store a zero on Upper matrix
+              U[i][j] = T(0);
+              L[i][j] = LU[i][j];
+            }else{//Diagonal. Store a '1' on Upper and the value on Lower
+              U[i][j] = T(1);
+              L[i][j] = LU[i][j];
+            }
+          }
+        }
+      }
+    }
   }
 
 

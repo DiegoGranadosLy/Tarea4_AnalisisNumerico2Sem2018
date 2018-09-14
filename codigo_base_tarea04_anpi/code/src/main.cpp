@@ -52,17 +52,22 @@ int main() {
   
   	// std::vector<size_t> p;
     anpi::Matrix<float> LU(B.rows(),B.cols(),float(0));
+    anpi::Matrix<float> L (B.rows(),B.cols(),float(0));
+    anpi::Matrix<float> U (B.rows(),B.cols(),float(0));
     std::vector<size_t> p;
     p.push_back(0);
     p.push_back(1);
     p.push_back(2);
     p.push_back(3);
+    std::cout << "\nValor de B\n";
     imprimir(B);
-    anpi::luCrout(B,LU,p);
+    // anpi::luCrout(B,LU,p);
+    anpi::unpackDoolittle(B,L,U);
   	// anpi::luDoolittle(B,LU,p);
-  	std::cout << "\n\n";
-    imprimir(LU);
-  
+  	std::cout << "\nValor de L\n";
+    imprimir(L);
+    std::cout << "\nValor de U\n";
+    imprimir(U);
   return EXIT_FAILURE;
 }
   
