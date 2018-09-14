@@ -36,6 +36,18 @@ altivec.h
 spe.h
 -
 
+../include/LUCrout.hpp
+cmath
+-
+limits
+-
+functional
+-
+Exception.hpp
+../include/Exception.hpp
+Matrix.hpp
+../include/Matrix.hpp
+
 ../include/LUDoolittle.hpp
 cmath
 -
@@ -89,6 +101,10 @@ cstdlib
 -
 iostream
 -
+vector
+-
 LUDoolittle.hpp
 /home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/src/LUDoolittle.hpp
+LUCrout.hpp
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/src/LUCrout.hpp
 

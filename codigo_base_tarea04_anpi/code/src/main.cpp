@@ -10,39 +10,58 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <vector>
 
 #include "LUDoolittle.hpp"
+#include "LUCrout.hpp"
 
 template<class T>
 void imprimir(anpi::Matrix<T> c){
-	for (int i=0;i<c.rows();i++){
-  		for (int j=0;j<c.cols();j++){
+	for (unsigned int i=0;i<c.rows();i++){
+  		for (unsigned int j=0;j<c.cols();j++){
   			std::cout << c[i][j] << "	";
   		}
   		std::cout << "\n";
   	}
 }
 
+void imprimir(std::vector<float> res){
+	for(unsigned int i=0;i<=res.size()-1;i++){
+    	std::cout << res[i] << "	";
+    }
+    std::cout << "\n";
+}
+
 int main() {
 
   // Some example code
-  	anpi::Matrix<float> A = { {-1,-2,1,2},
-                            { 2, 0,1,2},
-                            {-1,-1,0,1},
-                            { 1, 1,1,1} };
-                            
-  	anpi::Matrix<float> B = { { 1, 2, 3, 4},
-                            { 5, 6, 7, 8},
-                            { 9,10,11,12},
-                            {13,14,15,16} };
+  	// anpi::Matrix<float> A = { {-1,-2,1,2},
+   //                          { 2, 0,1,2},
+   //                          {-1,-1,0,1},
+   //                          { 1, 1,1,1} };
 
-	anpi::Matrix<float> C = A*B; 
-	imprimir(C);
+	anpi::Matrix<float> B ={{ 1,-1, 3, 6},
+							{ 2,-3, 1,-5},
+							{-6, 5, 4, 1},
+							{-1,-2,-1, 2} };
+
+	// anpi::Matrix<float> C = A*B; 
+	// imprimir(C);
 
 	// anpi::Matrix<float> LU;
   
   	// std::vector<size_t> p;
-  	// anpi::luDoolittle(A,LU,p);
+    anpi::Matrix<float> LU(B.rows(),B.cols(),float(0));
+    std::vector<size_t> p;
+    p.push_back(0);
+    p.push_back(1);
+    p.push_back(2);
+    p.push_back(3);
+    imprimir(B);
+    anpi::luCrout(B,LU,p);
+  	// anpi::luDoolittle(B,LU,p);
+  	std::cout << "\n\n";
+    imprimir(LU);
   
   return EXIT_FAILURE;
 }

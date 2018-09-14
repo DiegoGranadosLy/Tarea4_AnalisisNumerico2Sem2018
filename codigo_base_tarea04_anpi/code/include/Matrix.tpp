@@ -438,7 +438,7 @@ namespace anpi
       }
       return temp;
     }else{                    //Columnas y filas incompatibles.
-      std::cout << "Dimensiones incompatibles..!!" << "\n";
+      std::cout << "Dimensiones incompatibles 'Matriz X Matriz'" << "\n";
       return a;
     }
 
@@ -447,8 +447,20 @@ namespace anpi
   // TODO: Solucionar en la Tarea 04 (Punto 1)
   template<typename T,class Alloc>
   std::vector<T> operator*(const Matrix<T,Alloc>& a, const std::vector<T>& b) {
-    std::cout << "Multiplicacion Matriz por vector..!!" << "\n";
-    return b;
-
+    if (b.size()==a.cols()){
+      std::vector<T> res;
+      for(int i=a.rows()-1;i>=0;--i){
+        T temp = T(0);
+        for(int j=b.size()-1;j>=0;--j){
+          temp+=a[i][j]*b[j];
+        }
+        res.push_back(temp);
+        temp = T(0);
+      }
+      return res;
+    }else{
+      std::cout << "Dimensiones incompatibles 'Matriz X Vector'" << "\n";
+      return b;
+    }
   }
 } // namespace ANPI
