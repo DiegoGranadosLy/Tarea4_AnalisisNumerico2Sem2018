@@ -53,7 +53,6 @@ namespace anpi {
       R=A;
       anpi::Matrix<T> temp(A.rows(),A.cols(),T(0));
       for(unsigned int j=0;j<A.cols()-1;++j){
-        std::cout << "//////////////////////////////////////////////////////\n";
         T *vector= (T*)malloc(A.rows()*sizeof(T));
         T alfa = T(0);
         T norma=T(0);
@@ -66,8 +65,8 @@ namespace anpi {
         }
         vector[j]-=sqrt(alfa);  // u =a:1 - ||a:1||eo
         norma+=vector[j]*vector[j];
-        for(unsigned int u=0;u<A.rows();++u){   //uuT
-          for(unsigned int v=0;v<A.rows();++v){
+        for(unsigned int u=0;u<R.rows();++u){   //uuT
+          for(unsigned int v=0;v<R.rows();++v){
             if(u<j && v<j){//Before the column where we operate
               if(u==v){
                 temp[u][v] = T(1);//Diagonal.
@@ -89,47 +88,56 @@ namespace anpi {
           Q=temp;
           R=temp*A;
         }else{
-          anpi::Matrix<T> Qtemp(A.rows(),A.cols(),T(0));
-          anpi::Matrix<T> Rtemp(A.rows(),A.cols(),T(0));
+          anpi::Matrix<T> Rtemp(R.rows(),R.cols(),T(0));
+          anpi::Matrix<T> Qtemp(R.rows(),R.cols(),T(0));
           anpi::Matrix<T> QT   (A.rows(),A.cols(),T(0));
-          Qtemp = Q;
           Rtemp = R;
-          Q=Qtemp*temp;
-          // transpose(Q,QT);
-          R=Q*Rtemp;
+          Qtemp = Q;
+          transpose(temp,QT);
+          Q=QT*Qtemp;
+          R=QT*Rtemp;
         }
         ///////////////////////////////////////////Imprimir
-        std::cout << "\nAlfa:"  << alfa  << "\n";
-        std::cout << "\nNorma:" << norma << "\n";
-        std::cout << "\nVector:" << "\n";
-        for (unsigned int l=0;l<Q.cols();l++){
-          std::cout << vector[l] << "\n";
-        }
-        std::cout << "\n\nValor de Q\n";
-        for (unsigned int t=0;t<Q.rows();t++){
-          for (unsigned int l=0;l<Q.cols();l++){
-            std::cout << Q[t][l] << "			";
-          }
-          std::cout << "\n";
-        }
-        std::cout << "\nValor de R\n";
-        for (unsigned int t=0;t<R.rows();t++){
-          for (unsigned int l=0;l<R.cols();l++){
-            std::cout << R[t][l] << "			";
-          }
-          std::cout << "\n";
-        }
-        std::cout << "\nValor de temp\n";
-        for (unsigned int t=0;t<temp.rows();t++){
-          for (unsigned int l=0;l<temp.cols();l++){
-            std::cout << temp[t][l] << "			";
-          }
-          std::cout << "\n";
-        }
+        // std::cout << "\nAlfa:"  << alfa  << "\n";
+        // std::cout << "\nNorma:" << norma << "\n";
+        // std::cout << "\nVector:" << "\n";
+        // for (unsigned int l=0;l<Q.cols();l++){
+        //   std::cout << vector[l] << "\n";
+        // }
+        // std::cout << "\n\nValor de Q\n";
+        // for (unsigned int t=0;t<Q.rows();t++){
+        //   for (unsigned int l=0;l<Q.cols();l++){
+        //     std::cout << Q[t][l] << "			";
+        //   }
+        //   std::cout << "\n";
+        // }
+        // std::cout << "\n\nValor de R\n";
+        // for (unsigned int t=0;t<R.rows();t++){
+        //   for (unsigned int l=0;l<R.cols();l++){
+        //     std::cout << R[t][l] << "			";
+        //   }
+        //   std::cout << "\n";
+        // }
+        // std::cout << "\nValor de temp\n";
+        // for (unsigned int t=0;t<temp.rows();t++){
+        //   for (unsigned int l=0;l<temp.cols();l++){
+        //     std::cout << temp[t][l] << "			";
+        //   }
+        //   std::cout << "\n";
+        // }
         ///////////////////////////////////////////////////////////
         temp = Matrix<T>(A.rows(),A.cols(),T(0));
         free(vector);
       }
+      // anpi::Matrix<T> res(R.rows(),R.cols(),T(0));
+      // res = Q*R;
+      // std::cout << "\nMatriz res\n";
+      // for (unsigned int t=0;t<res.rows();t++){
+      //   for (unsigned int l=0;l<res.cols();l++){
+      //     std::cout << res[t][l] << "			";
+      //   }
+      //   std::cout << "\n";
+      // }
     }else{
       throw anpi::Exception("Dimensiones incompatibles\n");
     }
