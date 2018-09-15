@@ -94,10 +94,10 @@ namespace anpi {
           Rtemp = R;
           Qtemp = Q;
           transpose(temp,QT);
-          Q=QT*Qtemp;
+          Q=Qtemp*QT;
           R=QT*Rtemp;
         }
-        ///////////////////////////////////////////Imprimir
+        // /////////////////////////////////////////Imprimir
         // std::cout << "\nAlfa:"  << alfa  << "\n";
         // std::cout << "\nNorma:" << norma << "\n";
         // std::cout << "\nVector:" << "\n";
@@ -125,19 +125,19 @@ namespace anpi {
         //   }
         //   std::cout << "\n";
         // }
-        ///////////////////////////////////////////////////////////
+        // /////////////////////////////////////////////////////////
         temp = Matrix<T>(A.rows(),A.cols(),T(0));
         free(vector);
       }
-      // anpi::Matrix<T> res(R.rows(),R.cols(),T(0));
-      // res = Q*R;
-      // std::cout << "\nMatriz res\n";
-      // for (unsigned int t=0;t<res.rows();t++){
-      //   for (unsigned int l=0;l<res.cols();l++){
-      //     std::cout << res[t][l] << "			";
-      //   }
-      //   std::cout << "\n";
-      // }
+      anpi::Matrix<T> res(R.rows(),R.cols(),T(0));
+      res = Q*R;
+      std::cout << "\nMatriz res\n";
+      for (unsigned int t=0;t<res.rows();t++){
+        for (unsigned int l=0;l<res.cols();l++){
+          std::cout << res[t][l] << "			";
+        }
+        std::cout << "\n";
+      }
     }else{
       throw anpi::Exception("Dimensiones incompatibles\n");
     }
