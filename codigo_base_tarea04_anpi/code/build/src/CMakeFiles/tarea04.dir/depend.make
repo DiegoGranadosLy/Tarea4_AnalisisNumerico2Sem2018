@@ -10,6 +10,7 @@ src/CMakeFiles/tarea04.dir/main.cpp.o: ../include/LUCrout.hpp
 src/CMakeFiles/tarea04.dir/main.cpp.o: ../include/LUDoolittle.hpp
 src/CMakeFiles/tarea04.dir/main.cpp.o: ../include/Matrix.hpp
 src/CMakeFiles/tarea04.dir/main.cpp.o: ../include/Matrix.tpp
+src/CMakeFiles/tarea04.dir/main.cpp.o: ../include/QR.hpp
 src/CMakeFiles/tarea04.dir/main.cpp.o: ../include/bits/MatrixArithmetic.hpp
 src/CMakeFiles/tarea04.dir/main.cpp.o: ../src/main.cpp
 

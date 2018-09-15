@@ -14,12 +14,13 @@
 
 #include "LUDoolittle.hpp"
 #include "LUCrout.hpp"
+#include "QR.hpp"
 
 template<class T>
 void imprimir(anpi::Matrix<T> c){
 	for (unsigned int i=0;i<c.rows();i++){
   		for (unsigned int j=0;j<c.cols();j++){
-  			std::cout << c[i][j] << "	";
+  			std::cout << c[i][j] << "			";
   		}
   		std::cout << "\n";
   	}
@@ -44,30 +45,32 @@ int main() {
 							{ 2,-3, 1,-5},
 							{-6, 5, 4, 1},
 							{-1,-2,-1, 2} };
-
+    anpi::Matrix<float> Q (B.rows(),B.cols(),float(0));
+    anpi::Matrix<float> R (B.rows(),B.cols(),float(0));
 	// anpi::Matrix<float> C = A*B; 
 	// imprimir(C);
 
 	// anpi::Matrix<float> LU;
   
   	// std::vector<size_t> p;
-    anpi::Matrix<float> LU(B.rows(),B.cols(),float(0));
-    anpi::Matrix<float> L (B.rows(),B.cols(),float(0));
-    anpi::Matrix<float> U (B.rows(),B.cols(),float(0));
-    std::vector<size_t> p;
-    p.push_back(0);
-    p.push_back(1);
-    p.push_back(2);
-    p.push_back(3);
+    // anpi::Matrix<float> LU(B.rows(),B.cols(),float(0));
+    // anpi::Matrix<float> L (B.rows(),B.cols(),float(0));
+    // anpi::Matrix<float> U (B.rows(),B.cols(),float(0));
+    // std::vector<size_t> p;
+    // p.push_back(0);
+    // p.push_back(1);
+    // p.push_back(2);
+    // p.push_back(3);
     std::cout << "\nValor de B\n";
     imprimir(B);
+    anpi::qr(B,Q,R);
     // anpi::luCrout(B,LU,p);
-    anpi::unpackDoolittle(B,L,U);
+    // anpi::unpackDoolittle(B,L,U);
   	// anpi::luDoolittle(B,LU,p);
-  	std::cout << "\nValor de L\n";
-    imprimir(L);
-    std::cout << "\nValor de U\n";
-    imprimir(U);
+  	// std::cout << "\nValor de Q\n";
+    // imprimir(Q);
+    // std::cout << "\nValor de R\n";
+    // imprimir(R);
   return EXIT_FAILURE;
 }
   

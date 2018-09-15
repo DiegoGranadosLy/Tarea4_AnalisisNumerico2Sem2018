@@ -11,5 +11,6 @@ src/CMakeFiles/tarea04.dir/main.cpp.o
  ../include/LUDoolittle.hpp
  ../include/Matrix.hpp
  ../include/Matrix.tpp
+ ../include/QR.hpp
  ../include/bits/MatrixArithmetic.hpp
  /home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/src/main.cpp
