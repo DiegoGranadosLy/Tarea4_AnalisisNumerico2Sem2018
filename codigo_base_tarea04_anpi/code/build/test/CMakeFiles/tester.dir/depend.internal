@@ -22,9 +22,11 @@ test/CMakeFiles/tester.dir/testMain.cpp.o
 test/CMakeFiles/tester.dir/testMatrix.cpp.o
  ../include/Allocator.hpp
  ../include/AnpiConfig.hpp
+ ../include/Exception.hpp
  ../include/HasType.hpp
  ../include/Intrinsics.hpp
  ../include/Matrix.hpp
  ../include/Matrix.tpp
+ ../include/QR.hpp
  ../include/bits/MatrixArithmetic.hpp
  /home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/test/testMatrix.cpp

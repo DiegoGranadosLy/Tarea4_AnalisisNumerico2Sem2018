@@ -29,9 +29,13 @@ namespace anpi {
    */
   template<typename T>
   void unpackCrout(const Matrix<T>& LU,Matrix<T>& L,Matrix<T>& U) {
-    if ((LU.cols()==LU.rows())&&(L.cols()==L.rows())&&
-        (U.cols()==U.rows())  &&(LU.cols()==L.cols())&&
-        (LU.cols()==U.cols())){ //square Matrix (LU, L and U).
+    //Ajustando los valores de L y U.
+    L.allocate(LU.rows(),LU.cols());
+    L.fill(T(0));
+    U.allocate(LU.rows(),LU.cols());
+    U.fill(T(0));
+    //Fin del ajuste
+    if (LU.cols()==LU.rows()){ //square Matrix (LU, L and U).
       for(unsigned int i=0;i<LU.cols();++i){
         for(unsigned int j=0;j<LU.cols();++j){
           if(i<j){ //Save on Upper matrix and store a zero on Lower matrix
@@ -75,6 +79,16 @@ namespace anpi {
   void luCrout(const Matrix<T>& A,Matrix<T>& LU,std::vector<size_t>& permut){
     // http://claudiovz.github.io/metodos_numericos_I/
     // sistema_de_ecuaciones_lineales/sistema_de_ecuaciones_lineales008.html#___sec96
+    
+    //Ajustando los valores de permut y LU.
+    permut.resize(A.rows());
+    for(unsigned int i=0;i<permut.size();++i){
+      permut[i] = i;
+    }
+    LU.allocate(A.rows(),A.cols());
+    LU.fill(T(0));
+    //Fin del ajuste
+    
     if ((A.rows()==permut.size()) && (A.cols()==A.rows())){
       LU = A;        //Se realiza la copia de la matriz A en LU
       for(unsigned int i=0;i<A.rows();++i){

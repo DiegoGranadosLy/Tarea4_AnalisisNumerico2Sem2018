@@ -5,6 +5,9 @@
  * This file is part of the CE3102 Numerical Analysis lecture at TEC
  */
 
+#include <functional>
+
+#include <cmath>
 
 #include <boost/test/unit_test.hpp>
 
@@ -19,6 +22,7 @@
 
 #include "Matrix.hpp"
 #include "Allocator.hpp"
+#include "QR.hpp"
 
 // Explicit instantiation of all methods of Matrix
 
@@ -274,6 +278,86 @@ void testArithmetic() {
 
 BOOST_AUTO_TEST_CASE(Arithmetic) {
   dispatchTest(testArithmetic);  
+}
+
+  /////////////////////////////////////////////////////////////////
+
+BOOST_AUTO_TEST_CASE(Multiplication) {
+  {
+    anpi::Matrix<float> a = { {1,2,3},{ 4, 5, 6} };
+    anpi::Matrix<float> b = { {7,8,9},{10,11,12},{10,11,12} };
+    anpi::Matrix<float> c = { {7,8,9},{10,11,12} };
+    anpi::Matrix<float> d;
+    anpi::Matrix<float> r = { {57,63,69},{138,153,168} };
+    d = a*b;  //Multiplication made it. d = a*b
+
+    for(unsigned int i=0;i< d.rows();++i){
+      for(unsigned int j=0;j< d.cols();++j){
+        BOOST_CHECK( d[i][j]==r[i][j] );
+      }
+    }
+
+    d = a*c;  //Multiplication no made it. d=a
+    for(unsigned int i=0;i< d.rows();++i){
+      for(unsigned int j=0;j< d.cols();++j){
+        BOOST_CHECK( d[i][j]==a[i][j] );
+      }
+    }
+
+    std::vector<float> p    = {1,2,3};
+    std::vector<float> pp   = {1,2};
+    std::vector<float> pRes = {14,32};
+    std::vector<float> pR;
+    pR = a*p; //Multiplication made it. pR = a*p
+    for(unsigned int i=0;i< pR.size();++i){
+      BOOST_CHECK(pR[i]==pRes[i]);
+    }
+
+    pR = a*pp; //Multiplication no made it. pR = a*p
+    for(unsigned int i=0;i< pR.size();++i){
+      BOOST_CHECK( pR[i]==pp[i]);
+    }
+
+  }
+}
+
+BOOST_AUTO_TEST_CASE(QR){
+  anpi::Matrix<float> A = { { 2, 0,1,2},
+                          { 1, 1,1,1},
+                          {-1,-2,1,2},
+                          {-1,-1,0,1} };
+
+  anpi::Matrix<float> Q;
+  anpi::Matrix<float> QT;
+  anpi::Matrix<float> R;
+  anpi::Matrix<float> I;
+  anpi::qr(A,Q,R);
+
+  QT.allocate(Q.cols(),Q.rows());
+  QT.fill(float(0));
+
+  anpi::transpose(Q,QT);
+
+  I = QT*Q;
+
+  for (unsigned int i=0;i<I.rows();i++){    //Prueba para QT*Q = I
+    for (unsigned int j=0;j<I.cols();j++){
+      if(i!=j){
+        BOOST_CHECK((I[i][j]<0.00001)||(I[i][j]>-0.00001));   
+      }else{
+        BOOST_CHECK((I[i][j]<1.00001)||(I[i][j]>0.9998));
+      }
+    }
+  }
+
+  for (unsigned int i=0;i<R.rows();i++){    //Prueba para R = triangular superior
+    for (unsigned int j=0;j<R.cols();j++){
+      if(i>j){
+        BOOST_CHECK((I[i][j]<0.00001)||(I[i][j]>-0.00001));   
+      }
+    }
+  }
+
 }
   
 BOOST_AUTO_TEST_SUITE_END()

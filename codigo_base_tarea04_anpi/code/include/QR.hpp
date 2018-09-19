@@ -49,6 +49,7 @@ namespace anpi {
    */
   template<typename T>
   void qr( const anpi::Matrix<T>& A,anpi::Matrix<T>& Q,anpi::Matrix<T>& R ){
+    
     if(A.cols()==A.rows()){ //A is a square matrix.
       R=A;
       anpi::Matrix<T> temp(A.rows(),A.cols(),T(0));
@@ -97,47 +98,11 @@ namespace anpi {
           Q=Qtemp*QT;
           R=QT*Rtemp;
         }
-        // /////////////////////////////////////////Imprimir
-        // std::cout << "\nAlfa:"  << alfa  << "\n";
-        // std::cout << "\nNorma:" << norma << "\n";
-        // std::cout << "\nVector:" << "\n";
-        // for (unsigned int l=0;l<Q.cols();l++){
-        //   std::cout << vector[l] << "\n";
-        // }
-        // std::cout << "\n\nValor de Q\n";
-        // for (unsigned int t=0;t<Q.rows();t++){
-        //   for (unsigned int l=0;l<Q.cols();l++){
-        //     std::cout << Q[t][l] << "			";
-        //   }
-        //   std::cout << "\n";
-        // }
-        // std::cout << "\n\nValor de R\n";
-        // for (unsigned int t=0;t<R.rows();t++){
-        //   for (unsigned int l=0;l<R.cols();l++){
-        //     std::cout << R[t][l] << "			";
-        //   }
-        //   std::cout << "\n";
-        // }
-        // std::cout << "\nValor de temp\n";
-        // for (unsigned int t=0;t<temp.rows();t++){
-        //   for (unsigned int l=0;l<temp.cols();l++){
-        //     std::cout << temp[t][l] << "			";
-        //   }
-        //   std::cout << "\n";
-        // }
-        // /////////////////////////////////////////////////////////
         temp = Matrix<T>(A.rows(),A.cols(),T(0));
         free(vector);
       }
       anpi::Matrix<T> res(R.rows(),R.cols(),T(0));
       res = Q*R;
-      std::cout << "\nMatriz res\n";
-      for (unsigned int t=0;t<res.rows();t++){
-        for (unsigned int l=0;l<res.cols();l++){
-          std::cout << res[t][l] << "			";
-        }
-        std::cout << "\n";
-      }
     }else{
       throw anpi::Exception("Dimensiones incompatibles\n");
     }

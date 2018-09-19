@@ -427,10 +427,10 @@ namespace anpi
     if(a.cols()==b.rows()){    //Columnas de a compatibles con las filas de b.
       anpi::Matrix<T> temp(a.rows(),b.cols(),T(0));
       T tempValue;
-      for (int i=temp.rows()-1;i>=0;--i){
-        for (int j=temp.cols()-1;j>=0;--j){
+      for (unsigned int i=0;i<temp.rows();++i){
+        for (unsigned int j=0;j<temp.cols();++j){
           tempValue = T(0);
-          for (int k=temp.rows()-1;k>=0;--k){
+          for (unsigned int k=0;k<temp.cols();++k){
             tempValue+=a[i][k]*b[k][j];
           }
           temp[i][j] = tempValue;
@@ -449,9 +449,9 @@ namespace anpi
   std::vector<T> operator*(const Matrix<T,Alloc>& a, const std::vector<T>& b) {
     if (b.size()==a.cols()){
       std::vector<T> res;
-      for(int i=a.rows()-1;i>=0;--i){
+      for(unsigned int i=0;i<a.rows();++i){
         T temp = T(0);
-        for(int j=b.size()-1;j>=0;--j){
+        for(unsigned int j=0;j<b.size();++j){
           temp+=a[i][j]*b[j];
         }
         res.push_back(temp);
@@ -459,7 +459,7 @@ namespace anpi
       }
       return res;
     }else{
-      std::cout << "Dimensiones incompatibles 'Matriz X Vector'" << "\n";
+      std::cout << "Dimensiones incompatibles 'Matriz X Vector'";
       return b;
     }
   }

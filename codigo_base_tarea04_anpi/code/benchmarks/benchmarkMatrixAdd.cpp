@@ -23,6 +23,9 @@
 #include "benchmarkFramework.hpp"
 #include "Matrix.hpp"
 #include "Allocator.hpp"
+#include "LUDoolittle.hpp"
+#include "LUCrout.hpp"
+#include "QR.hpp"
 
 BOOST_AUTO_TEST_SUITE( Matrix )
 
@@ -60,6 +63,48 @@ public:
     this->_b=this->_a;
   }
 };
+
+/// Benchmark for addition operations
+template<typename T>
+class benchLU {
+protected:
+  /// Maximum allowed size for the square matrices
+  const size_t _maxSize;
+
+  /// A large matrix holding 
+  anpi::Matrix<T> _data;
+
+  /// State of the benchmarked evaluation
+  anpi::Matrix<T> _a;
+  anpi::Matrix<T> _b;
+  std::vector <T> _c;
+public:
+  /// Construct
+  benchLU(const size_t maxSize)
+    : _maxSize(maxSize),_data(maxSize,maxSize,anpi::DoNotInitialize) {
+
+    size_t idx=0;
+    for (size_t r=0;r<_maxSize;++r) {
+      for (size_t c=0;c<_maxSize;++c) {
+        _data(r,c)=idx++;
+      }
+    }
+  }
+
+  /// Prepare the evaluation of given size
+  void prepare(const size_t size) {
+    assert (size<=this->_maxSize);
+    std::vector<T> temp(size);
+    this->_a=std::move(anpi::Matrix<T>(size,size,_data.data()));
+    this->_b=this->_a;
+    this->_c=temp;
+    for(unsigned int i=0;i<size;++i){
+      this->_c[i] = i;
+    }
+  }
+};
+
+
 
 /// Provide the evaluation method for in-place addition 
 template<typename T>
@@ -112,11 +157,118 @@ public:
     anpi::simd::add(this->_a,this->_b,this->_c);
   }
 };
+/////////////////////////////////////////////////////////////////////////
+/// Provide the evaluation method for Doolittle 
+template<typename T>
+class benchLUCrout : public benchLU<T> {
+public:
+  /// Constructor
+  benchLUCrout(const size_t n) : benchLU<T>(n) { }
+  
+  // Evaluate Doolittle
+  inline void eval() {
+    // anpi::luDoolittle(this->_a,this->_b,this->_c);
+  }
+};
+
+/// Provide the evaluation method for Crout 
+template<typename T>
+class benchLUDoolittle : public benchLU<T> {
+public:
+  /// Constructor
+  benchLUDoolittle(const size_t n) : benchLU<T>(n) { }
+  
+  // Evaluate Crout
+  inline void eval() {
+    // anpi::luCrout(this->_a,this->_b,this->_c);
+  }
+};
+///////////////////////////////////////////////////////////////////////
+
+// /**
+//  * Instantiate and test the methods of the Matrix class
+//  */
+// BOOST_AUTO_TEST_CASE( Add ) {
+
+//   std::vector<size_t> sizes = {  24,  32,  48,  64,
+//                                  96, 128, 192, 256,
+//                                 384, 512, 768,1024,
+//                                1536,2048,3072,4096};
+
+//   const size_t n=sizes.back();
+//   const size_t repetitions=100;
+//   std::vector<anpi::benchmark::measurement> times;
+
+//   {
+//     benchAddOnCopyFallback<float>  baoc(n);
+
+//     // Measure on-copy add
+//     ANPI_BENCHMARK(sizes,repetitions,times,baoc);
+    
+//     ::anpi::benchmark::write("add_on_copy_float_fb.txt",times);
+//     ::anpi::benchmark::plotRange(times,"On-copy (float) fallback","r");
+//   }
+
+//   {
+//     benchAddOnCopySIMD<float>  baoc(n);
+
+//     // Measure on-copy add
+//     ANPI_BENCHMARK(sizes,repetitions,times,baoc);
+    
+//     ::anpi::benchmark::write("add_on_copy_float_simd.txt",times);
+//     ::anpi::benchmark::plotRange(times,"On-copy (float) simd","g");
+//   }
+  
+//   {
+//     benchAddInPlaceFallback<float> baip(n);
+
+//     // Measure in place add
+//     ANPI_BENCHMARK(sizes,repetitions,times,baip);
+
+//     ::anpi::benchmark::write("add_in_place_float_fb.txt",times);
+//     ::anpi::benchmark::plotRange(times,"In-place (float) fallback","b");
+//   }
+
+//   {
+//     benchAddInPlaceSIMD<float> baip(n);
+
+//     // Measure in place add
+//     ANPI_BENCHMARK(sizes,repetitions,times,baip);
+
+//     ::anpi::benchmark::write("add_in_place_float_simd.txt",times);
+//     ::anpi::benchmark::plotRange(times,"In-place (float) simd","m");
+//   }
+  
+// #if 0
+  
+//   {
+//     benchAddOnCopy<double>  baoc(n);
+
+//     // Measure on-copy add
+//     ANPI_BENCHMARK(sizes,repetitions,times,baoc);
+    
+//     ::anpi::benchmark::write("add_on_copy_double.txt",times);
+//     ::anpi::benchmark::plotRange(times,"On-copy (double)","g");
+//   }
+
+//   {
+//     benchAddInPlace<double> baip(n);
+
+//     // Measure in place add
+//     ANPI_BENCHMARK(sizes,repetitions,times,baip);
+
+//     ::anpi::benchmark::write("add_in_place_double.txt",times);
+//     ::anpi::benchmark::plotRange(times,"In-place (double)","m");
+//   }
+// #endif
+  
+//   ::anpi::benchmark::show();
+// }
 
 /**
  * Instantiate and test the methods of the Matrix class
  */
-BOOST_AUTO_TEST_CASE( Add ) {
+BOOST_AUTO_TEST_CASE( lu ) {
 
   std::vector<size_t> sizes = {  24,  32,  48,  64,
                                  96, 128, 192, 256,
@@ -128,66 +280,28 @@ BOOST_AUTO_TEST_CASE( Add ) {
   std::vector<anpi::benchmark::measurement> times;
 
   {
-    benchAddOnCopyFallback<float>  baoc(n);
+    benchLUCrout<float>  baoc1(n);
 
     // Measure on-copy add
-    ANPI_BENCHMARK(sizes,repetitions,times,baoc);
+    ANPI_BENCHMARK(sizes,repetitions,times,baoc1);
     
-    ::anpi::benchmark::write("add_on_copy_float_fb.txt",times);
-    ::anpi::benchmark::plotRange(times,"On-copy (float) fallback","r");
+    ::anpi::benchmark::write("luCrout.txt",times);
+    ::anpi::benchmark::plotRange(times,"LU-Crout","r");
   }
 
   {
-    benchAddOnCopySIMD<float>  baoc(n);
+    benchLUDoolittle<float>  baoc2(n);
 
     // Measure on-copy add
-    ANPI_BENCHMARK(sizes,repetitions,times,baoc);
+    ANPI_BENCHMARK(sizes,repetitions,times,baoc2);
     
-    ::anpi::benchmark::write("add_on_copy_float_simd.txt",times);
-    ::anpi::benchmark::plotRange(times,"On-copy (float) simd","g");
+    ::anpi::benchmark::write("luDoolittle.txt",times);
+    ::anpi::benchmark::plotRange(times,"LU-Doolittle","g");
   }
   
-  {
-    benchAddInPlaceFallback<float> baip(n);
-
-    // Measure in place add
-    ANPI_BENCHMARK(sizes,repetitions,times,baip);
-
-    ::anpi::benchmark::write("add_in_place_float_fb.txt",times);
-    ::anpi::benchmark::plotRange(times,"In-place (float) fallback","b");
-  }
-
-  {
-    benchAddInPlaceSIMD<float> baip(n);
-
-    // Measure in place add
-    ANPI_BENCHMARK(sizes,repetitions,times,baip);
-
-    ::anpi::benchmark::write("add_in_place_float_simd.txt",times);
-    ::anpi::benchmark::plotRange(times,"In-place (float) simd","m");
-  }
   
 #if 0
-  
-  {
-    benchAddOnCopy<double>  baoc(n);
 
-    // Measure on-copy add
-    ANPI_BENCHMARK(sizes,repetitions,times,baoc);
-    
-    ::anpi::benchmark::write("add_on_copy_double.txt",times);
-    ::anpi::benchmark::plotRange(times,"On-copy (double)","g");
-  }
-
-  {
-    benchAddInPlace<double> baip(n);
-
-    // Measure in place add
-    ANPI_BENCHMARK(sizes,repetitions,times,baip);
-
-    ::anpi::benchmark::write("add_in_place_double.txt",times);
-    ::anpi::benchmark::plotRange(times,"In-place (double)","m");
-  }
 #endif
   
   ::anpi::benchmark::show();

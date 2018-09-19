@@ -14,6 +14,10 @@ HasType.hpp
 
 ../include/AnpiConfig.hpp
 
+../include/Exception.hpp
+exception
+-
+
 ../include/HasType.hpp
 
 ../include/Intrinsics.hpp
@@ -31,6 +35,32 @@ altivec.h
 -
 spe.h
 -
+
+../include/LUCrout.hpp
+cmath
+-
+limits
+-
+functional
+-
+Exception.hpp
+../include/Exception.hpp
+Matrix.hpp
+../include/Matrix.hpp
+
+../include/LUDoolittle.hpp
+cmath
+-
+limits
+-
+functional
+-
+algorithm
+-
+Exception.hpp
+../include/Exception.hpp
+Matrix.hpp
+../include/Matrix.hpp
 
 ../include/Matrix.hpp
 cstddef
@@ -73,6 +103,18 @@ PlotPy.tpp
 ../include/PlotPy.tpp
 
 ../include/PlotPy.tpp
+
+../include/QR.hpp
+cmath
+-
+limits
+-
+functional
+-
+Exception.hpp
+../include/Exception.hpp
+Matrix.hpp
+../include/Matrix.hpp
 
 ../include/bits/MatrixArithmetic.hpp
 Intrinsics.hpp
@@ -117,4 +159,10 @@ Matrix.hpp
 /home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/benchmarks/Matrix.hpp
 Allocator.hpp
 /home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/benchmarks/Allocator.hpp
+LUDoolittle.hpp
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/benchmarks/LUDoolittle.hpp
+LUCrout.hpp
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/benchmarks/LUCrout.hpp
+QR.hpp
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/benchmarks/QR.hpp
 

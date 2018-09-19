@@ -90,6 +90,18 @@ bits/MatrixArithmetic.hpp
 iostream
 -
 
+../include/QR.hpp
+cmath
+-
+limits
+-
+functional
+-
+Exception.hpp
+../include/Exception.hpp
+Matrix.hpp
+../include/Matrix.hpp
+
 ../include/bits/MatrixArithmetic.hpp
 Intrinsics.hpp
 ../include/bits/Intrinsics.hpp
@@ -127,6 +139,10 @@ boost/test/unit_test.hpp
 -
 
 /home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/test/testMatrix.cpp
+functional
+-
+cmath
+-
 boost/test/unit_test.hpp
 -
 iostream
@@ -141,4 +157,6 @@ Matrix.hpp
 /home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/test/Matrix.hpp
 Allocator.hpp
 /home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/test/Allocator.hpp
+QR.hpp
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/test/QR.hpp
 

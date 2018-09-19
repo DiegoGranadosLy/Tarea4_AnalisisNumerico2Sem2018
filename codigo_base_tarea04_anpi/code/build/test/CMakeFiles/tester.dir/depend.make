@@ -21,10 +21,12 @@ test/CMakeFiles/tester.dir/testMain.cpp.o: ../test/testMain.cpp
 
 test/CMakeFiles/tester.dir/testMatrix.cpp.o: ../include/Allocator.hpp
 test/CMakeFiles/tester.dir/testMatrix.cpp.o: ../include/AnpiConfig.hpp
+test/CMakeFiles/tester.dir/testMatrix.cpp.o: ../include/Exception.hpp
 test/CMakeFiles/tester.dir/testMatrix.cpp.o: ../include/HasType.hpp
 test/CMakeFiles/tester.dir/testMatrix.cpp.o: ../include/Intrinsics.hpp
 test/CMakeFiles/tester.dir/testMatrix.cpp.o: ../include/Matrix.hpp
 test/CMakeFiles/tester.dir/testMatrix.cpp.o: ../include/Matrix.tpp
+test/CMakeFiles/tester.dir/testMatrix.cpp.o: ../include/QR.hpp
 test/CMakeFiles/tester.dir/testMatrix.cpp.o: ../include/bits/MatrixArithmetic.hpp
 test/CMakeFiles/tester.dir/testMatrix.cpp.o: ../test/testMatrix.cpp
 

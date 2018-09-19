@@ -56,15 +56,15 @@ namespace anpi {
         std::vector<size_t> p;
         decomp(A,LU,p);
 
-        std::vector<size_t> gp= {1,0,3,2};
+        std::vector<size_t> gp= {1,3,0,2};
         BOOST_CHECK(gp==p);
       }
       
       // Test decomposition
       {
         // same matrix as before, but already permuted to force a
-        // clean decomposition
-        anpi::Matrix<T> A = { { 2, 0,1,2},{-1,-2,1,2},{ 1, 1,1,1},{-1,-1,0,1} };
+        // clean decomposition        [1,3,0,2]
+        anpi::Matrix<T> A = { { 2, 0,1,2},{ 1, 1,1,1},{-1,-2,1,2},{-1,-1,0,1} };
         std::vector<size_t> p;
         decomp(A,LU,p);
         Matrix<T> L,U;
