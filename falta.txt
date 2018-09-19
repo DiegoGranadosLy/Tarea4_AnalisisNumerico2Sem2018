@@ -1,6 +1,5 @@
 Casilisto...........................................Punto 6. Comparacion de los algoritmos de Doolitle y Crout en cuanto al tamano de A.
 Punto 7. Funcion inline lu que llame al metodo mas rapido.
-Punto 9. Verificar la descomposicion QR.
 Punto 10.Pruebas unitarias de LU.
 Punto 11.Pruebas unitarias.
 Punto 12.Metodo de inversion de matrices.
