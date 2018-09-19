@@ -331,10 +331,14 @@ BOOST_AUTO_TEST_CASE(QR){
   anpi::Matrix<float> QT;
   anpi::Matrix<float> R;
   anpi::Matrix<float> I;
+  anpi::Matrix<float> Ar;
   anpi::qr(A,Q,R);
 
   QT.allocate(Q.cols(),Q.rows());
   QT.fill(float(0));
+
+  Ar.allocate(A.rows(),A.cols());
+  Ar.fill(float(0));  
 
   anpi::transpose(Q,QT);
 
@@ -358,6 +362,12 @@ BOOST_AUTO_TEST_CASE(QR){
     }
   }
 
+  Ar = Q*R;
+  for (unsigned int i=0;i<A.rows();i++){    //A = Q*R
+    for (unsigned int j=0;j<A.cols();j++){
+        BOOST_CHECK((A[i][j]<Ar[i][j]+0.00001)&&(A[i][j]>Ar[i][j]-0.00001));   
+    }
+  }  
 }
   
 BOOST_AUTO_TEST_SUITE_END()
