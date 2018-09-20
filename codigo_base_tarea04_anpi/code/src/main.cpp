@@ -43,16 +43,24 @@ int main() {
 
 
   	std::vector<size_t> p;
-    anpi::Matrix<float> Q;
-    anpi::Matrix<float> R;
+    anpi::Matrix<float> LU;
+    anpi::Matrix<float> L;
+    anpi::Matrix<float> U;
+    anpi::Matrix<float> inv;
+    anpi::Matrix<float> Ar;
+
     std::cout << "\nValor de A\n";
     imprimir(A);
-    anpi::qr(A,Q,R);
-    std::cout << "\nValor de Q\n";
-    imprimir(Q);
-    std::cout << "\nValor de R\n";
-    imprimir(R);
-    anpi::Matrix<float> Ar = Q*R;
+    anpi::luDoolittle(A,LU,p);
+    anpi::unpackDoolittle(LU,L,U);
+    anpi::luinv(inv,LU);
+    std::cout << "\nValor de L\n";
+    imprimir(L);
+    std::cout << "\nValor de U\n";
+    imprimir(U);
+    std::cout << "\nValor de Inv\n";
+    imprimir(inv);
+    Ar = A*inv;
   	std::cout << "\nValor de Ar\n";
     imprimir(Ar);
   return EXIT_FAILURE;

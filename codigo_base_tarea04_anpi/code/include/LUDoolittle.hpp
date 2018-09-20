@@ -132,6 +132,46 @@ namespace anpi {
       throw anpi::Exception("Dimensiones incompatibles\n");
     }
   }
+
+  template<typename T>
+  void luinv(Matrix<T>& inv, Matrix<T>& LU){
+    std::vector<T> b;
+    std::vector<T> x;
+    b.resize(LU.rows());
+    x.resize(LU.rows());
+    inv.allocate(LU.rows(),LU.cols());
+    inv.fill(T(0));
+
+    for(unsigned int i=0; i<LU.rows();++i){
+      // Vector de términos independientes, columna i de la identidad
+      for(unsigned int j=0;j<LU.rows();++j){
+        b[j] = (j == i) ? 1 : 0;
+      }
+      // Resuelve el problema y obtiene la columna i de la inversa
+
+      //Sustitucion hacia adelante
+      for(unsigned int j=1;j<LU.rows();++j){    //Recorre columna
+        for(unsigned int k=0;k<j;++k){          //Recorre fila
+          b[j]-=LU[j][k]*b[k];
+        }
+      }
+
+      //Sustitucion hacia atras.
+      x[LU.rows()-1] = b[LU.rows()-1]/LU[LU.rows()-1][LU.rows()-1];
+      for(int j=LU.rows()-2;j>=0;--j){
+        x[j] = b[j];
+        for(int k=LU.rows()-1;k>j;--k){
+          x[j]-=LU[j][k]*x[k];
+        }
+        x[j] = x[j]/LU[j][j];
+      }
+      //Almacenamiento
+      for(unsigned int j=0;j<LU.rows();++j){
+        inv[j][i] = x[j];
+      }
+    }
+  }
+  
 }
 
 #endif

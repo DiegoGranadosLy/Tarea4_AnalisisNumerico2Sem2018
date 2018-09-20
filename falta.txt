@@ -1,4 +1,3 @@
-Casilisto...........................................Punto 6. Comparacion de los algoritmos de Doolitle y Crout en cuanto al tamano de A.
 Punto 7. Funcion inline lu que llame al metodo mas rapido.
 Punto 10.Pruebas unitarias de LU.
 Punto 11.Pruebas unitarias.
