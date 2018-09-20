@@ -35,34 +35,46 @@ void imprimir(std::vector<float> res){
 
 int main() {
 
-  // Some example code
-  anpi::Matrix<float> A = { { 2, 0,1,2},
-                          { 1, 1,1,1},
-                          {-1,-2,1,2},
-                          {-1,-1,0,1} };
+  int metodo;
+  int dimension;
+  //Loop del menu..!!
+  while (true) {
+    std::cout << std::endl << std::endl << "!!!-!!!-!!!-!!!-!!!-!!!-!!!-!!!-!!!-!!!-!!!" << std::endl << std::endl;
+    menu:std::cout << "Elegir método de descomposicion: " << std::endl;
+    std::cout << "   1) Doolittle." << std::endl;
+    std::cout << "   2) Crout." << std::endl;
+    std::cout << "   3) QR." << std::endl;
+    std::cout << "   4) Salir." << std::endl;
 
+    std::cout << std::endl << "Seleccione un metodo para correr: ";
+    std::cin >> metodo;
+    
+    if (metodo > 4 || metodo < 1) {
+      std::cout << "Intentar de nuevo: " << std::endl;
+      goto menu;
+    }else
+      if (metodo == 4) {
+        std::cout << "Saliendo..." << std::endl;
+        break;
+      }
 
-  	std::vector<size_t> p;
-    anpi::Matrix<float> LU;
-    anpi::Matrix<float> L;
-    anpi::Matrix<float> U;
-    anpi::Matrix<float> inv;
-    anpi::Matrix<float> Ar;
+    std::cout << "Dimension de la matriz: ";
+    std::cin >> dimension;
 
-    std::cout << "\nValor de A\n";
-    imprimir(A);
-    anpi::luDoolittle(A,LU,p);
-    anpi::unpackDoolittle(LU,L,U);
-    anpi::luinv(inv,LU);
-    std::cout << "\nValor de L\n";
-    imprimir(L);
-    std::cout << "\nValor de U\n";
-    imprimir(U);
-    std::cout << "\nValor de Inv\n";
-    imprimir(inv);
-    Ar = A*inv;
-  	std::cout << "\nValor de Ar\n";
-    imprimir(Ar);
+  
+    switch (metodo) {
+      case 1:                           //Algoritmo de biseccion
+        std::cout << " Doolitle" << std::endl;
+        break;
+      case 2:                           //Algoritmo de biseccion
+        std::cout << " Crout" << std::endl;
+        break;
+      case 3:                           //Algoritmo de biseccion
+        std::cout << " QR" << std::endl;
+        break;
+      default:
+        break;
+    }
+  }
   return EXIT_FAILURE;
 }
-  
