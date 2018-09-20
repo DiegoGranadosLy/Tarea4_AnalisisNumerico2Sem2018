@@ -25,6 +25,8 @@ test/CMakeFiles/tester.dir/testMatrix.cpp.o
  ../include/Exception.hpp
  ../include/HasType.hpp
  ../include/Intrinsics.hpp
+ ../include/LUCrout.hpp
+ ../include/LUDoolittle.hpp
  ../include/Matrix.hpp
  ../include/Matrix.tpp
  ../include/QR.hpp

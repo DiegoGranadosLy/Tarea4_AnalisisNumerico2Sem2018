@@ -157,6 +157,10 @@ Matrix.hpp
 /home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/test/Matrix.hpp
 Allocator.hpp
 /home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/test/Allocator.hpp
+LUDoolittle.hpp
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/test/LUDoolittle.hpp
+LUCrout.hpp
+/home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/test/LUCrout.hpp
 QR.hpp
 /home/diego/Documentos/Analisis/Tareas/tarea4/Tarea4_AnalisisNumerico2Sem2018/codigo_base_tarea04_anpi/code/test/QR.hpp
 

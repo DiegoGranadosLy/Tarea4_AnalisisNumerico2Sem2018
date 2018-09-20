@@ -24,6 +24,8 @@ test/CMakeFiles/tester.dir/testMatrix.cpp.o: ../include/AnpiConfig.hpp
 test/CMakeFiles/tester.dir/testMatrix.cpp.o: ../include/Exception.hpp
 test/CMakeFiles/tester.dir/testMatrix.cpp.o: ../include/HasType.hpp
 test/CMakeFiles/tester.dir/testMatrix.cpp.o: ../include/Intrinsics.hpp
+test/CMakeFiles/tester.dir/testMatrix.cpp.o: ../include/LUCrout.hpp
+test/CMakeFiles/tester.dir/testMatrix.cpp.o: ../include/LUDoolittle.hpp
 test/CMakeFiles/tester.dir/testMatrix.cpp.o: ../include/Matrix.hpp
 test/CMakeFiles/tester.dir/testMatrix.cpp.o: ../include/Matrix.tpp
 test/CMakeFiles/tester.dir/testMatrix.cpp.o: ../include/QR.hpp

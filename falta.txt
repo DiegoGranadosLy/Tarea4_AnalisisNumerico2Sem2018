@@ -1,5 +1,4 @@
 Punto 7. Funcion inline lu que llame al metodo mas rapido.
 Punto 10.Pruebas unitarias de LU.
 Punto 11.Pruebas unitarias.
-Punto 12.Metodo de inversion de matrices.
 Punto 13.Pruebas unitarias de inversion de matrices.

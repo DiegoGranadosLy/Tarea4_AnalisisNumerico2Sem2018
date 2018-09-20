@@ -22,6 +22,9 @@
 
 #include "Matrix.hpp"
 #include "Allocator.hpp"
+
+#include "LUDoolittle.hpp"
+#include "LUCrout.hpp"
 #include "QR.hpp"
 
 // Explicit instantiation of all methods of Matrix
@@ -347,9 +350,9 @@ BOOST_AUTO_TEST_CASE(QR){
   for (unsigned int i=0;i<I.rows();i++){    //Prueba para QT*Q = I
     for (unsigned int j=0;j<I.cols();j++){
       if(i!=j){
-        BOOST_CHECK((I[i][j]<0.00001)||(I[i][j]>-0.00001));   
+        BOOST_CHECK((I[i][j]<0.0001)||(I[i][j]>-0.0001));   
       }else{
-        BOOST_CHECK((I[i][j]<1.00001)||(I[i][j]>0.9998));
+        BOOST_CHECK((I[i][j]<1.0001)||(I[i][j]>0.998));
       }
     }
   }
@@ -357,7 +360,7 @@ BOOST_AUTO_TEST_CASE(QR){
   for (unsigned int i=0;i<R.rows();i++){    //Prueba para R = triangular superior
     for (unsigned int j=0;j<R.cols();j++){
       if(i>j){
-        BOOST_CHECK((I[i][j]<0.00001)||(I[i][j]>-0.00001));   
+        BOOST_CHECK((I[i][j]<0.0001)||(I[i][j]>-0.0001));   
       }
     }
   }
@@ -365,9 +368,46 @@ BOOST_AUTO_TEST_CASE(QR){
   Ar = Q*R;
   for (unsigned int i=0;i<A.rows();i++){    //A = Q*R
     for (unsigned int j=0;j<A.cols();j++){
-        BOOST_CHECK((A[i][j]<Ar[i][j]+0.00001)&&(A[i][j]>Ar[i][j]-0.00001));   
+        BOOST_CHECK((A[i][j]<Ar[i][j]+0.0001)&&(A[i][j]>Ar[i][j]-0.0001));   
     }
   }  
+}
+
+BOOST_AUTO_TEST_CASE(Inversion_LU){
+  anpi::Matrix<float> A = { { 2, 0,1,2},
+                          { 1, 1,1,1},
+                          {-1,-2,1,2},
+                          {-1,-1,0,1} };
+
+  anpi::Matrix<float> LU;
+  anpi::Matrix<float> inv;
+  anpi::Matrix<float> I;
+  std::vector<size_t> p;
+  
+  LU.allocate(A.cols(),A.rows());
+  LU.fill(float(0));
+
+  inv.allocate(LU.cols(),LU.rows());
+  inv.fill(float(0));
+
+  I.allocate(A.rows(),A.cols());
+  I.fill(float(0));
+
+  anpi::luDoolittle(A,LU,p);
+  anpi::luinv(inv,LU);
+
+  I = A*inv;
+
+  for (unsigned int i=0;i<I.rows();i++){    //Prueba para A*A^(-1) = I
+    for (unsigned int j=0;j<I.cols();j++){
+      if(i!=j){
+        BOOST_CHECK((I[i][j]<0.0001)||(I[i][j]>-0.0001));   
+      }else{
+        BOOST_CHECK((I[i][j]<1.0001)||(I[i][j]>0.998));
+      }
+    }
+  }
+
 }
   
 BOOST_AUTO_TEST_SUITE_END()
