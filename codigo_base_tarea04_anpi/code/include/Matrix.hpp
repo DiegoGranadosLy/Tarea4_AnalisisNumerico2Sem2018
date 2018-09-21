@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2017 
+ * Copyright (C) 2017
  * Área Académica de Ingeniería en Computadoras, ITCR, Costa Rica
  *
  * This file is part of the numerical analysis lecture CE3102 at TEC
@@ -32,7 +32,7 @@ namespace anpi
   enum InitializationType {
     DoNotInitialize
   };
-  
+
   /**
    * Row-major matrix class.
    *
@@ -50,7 +50,7 @@ namespace anpi
    */
   template<typename T,class Alloc=anpi::aligned_row_allocator<T> >
   class Matrix {
-  public:   
+  public:
     /**
      * @name Standard types
      */
@@ -63,11 +63,11 @@ namespace anpi
 
     typedef typename std::allocator_traits<allocator_type>::pointer
       pointer;
-      
+
     typedef typename std::pointer_traits<pointer>::template
       rebind<const value_type> const_pointer;
     //@}
-   
+
   protected:
     /**
      * Data is held in an instance of this.
@@ -78,13 +78,13 @@ namespace anpi
     struct _Matrix_impl : public allocator_type {
       /// All matrix data
       pointer _data;
-      
+
       /// Number of rows
       size_t _rows;
-      
+
       /// Effective number of columns
       size_t _cols;
-      
+
       /// Dominant (real) number of columns
       size_t _dcols;
 
@@ -98,7 +98,7 @@ namespace anpi
       /// Allocator indicates we must align each row
       static constexpr bool rowAlign =
         extract_alignment<allocator_type>::row_aligned;
-      
+
       /**
        * @name Default constructor
        */
@@ -107,7 +107,7 @@ namespace anpi
       _Matrix_impl(allocator_type const& _a) noexcept;
       _Matrix_impl(allocator_type&& _a) noexcept;
       //@}
-      
+
       void _swap_data(_Matrix_impl& _x) noexcept;
     };
 
@@ -150,7 +150,7 @@ namespace anpi
     Matrix(Matrix<T,Alloc>&& _other);
     Matrix(Matrix<T,Alloc>&& _other,const allocator_type& _a);
     ~Matrix() noexcept;
-    
+
     /**
      * Constructs a matrix from a std::initializer_list
      *
@@ -163,10 +163,10 @@ namespace anpi
     Matrix(std::initializer_list< std::initializer_list<value_type> > _lst);
     Matrix(std::initializer_list< std::initializer_list<value_type> > _lst,
            const allocator_type& _a);
-    
+
     //@}
 
-    
+
     /**
      * Deep copy another matrix
      */
@@ -190,7 +190,7 @@ namespace anpi
      * This is slow, as all componentes are elementwise compared
      */
     bool operator!=(const Matrix<T,Alloc>& other) const;
-    
+
     /// Return pointer to a given row
     inline T* operator[](const size_t row) {
       return this->_impl._data + row * this->_impl._dcols;
@@ -217,7 +217,7 @@ namespace anpi
      * Swap the contents of the other matrix with this one
      */
     void swap(Matrix<T,Alloc>& other);
-    
+
     /**
      * Allocate memory for the given number of rows and cols
      */
@@ -227,7 +227,7 @@ namespace anpi
      * Reset this matrix to a default constructed empty state
      */
     void clear();
-    
+
     /**
      * Fill all elements of the matrix with the given value
      */
@@ -237,7 +237,7 @@ namespace anpi
      * Fill all elements of the matrix with the given memory block
      *
      * The user must ensure that the given memory block has enough elements
-     * and with the same layout used in this matrix, including the 
+     * and with the same layout used in this matrix, including the
      * row padding.
      */
     void fill(const T* mem);
@@ -249,7 +249,7 @@ namespace anpi
      */
     template<class OAlloc>
     void fill(const Matrix<T,OAlloc>& _other);
-    
+
     /**
      * Check if the matrix is empty (zero rows or columns)
      */
@@ -257,7 +257,7 @@ namespace anpi
       return ( (this->_impl._rows==0) ||
                (this->_impl._cols==0) );
     }
-    
+
     /**
      * Number of rows
      */
@@ -279,7 +279,7 @@ namespace anpi
       return this->_impl._dcols;
     }
 
-    
+
     /**
      * Total number of entries (rows x cols)
      */
@@ -303,7 +303,7 @@ namespace anpi
      * This method has to copy the column, and hence it is relatively slow
      */
     inline std::vector<value_type> column(const size_t col) const;
-    
+
     /**
      * @name Arithmetic operators
      */
@@ -314,15 +314,15 @@ namespace anpi
 
     /// Subtract another matrix to this one, and leave the result in here
     Matrix& operator-=(const Matrix& other);
-    
+
     //@}
 
   private:
 
-    // Call the memory deallocation 
+    // Call the memory deallocation
     void _deallocate();
 
-    
+
     /// Use the allocator to create the necessary storage
     void _create_storage(size_t _rows,size_t _cols);
 
@@ -330,7 +330,7 @@ namespace anpi
     allocator_type& _get_allocator() noexcept;
 
     /// Read-only reference to the allocator in use
-    const allocator_type& _get_allocator() const noexcept;    
+    const allocator_type& _get_allocator() const noexcept;
 
     /**
      * Fill with an initializer list
@@ -356,10 +356,10 @@ namespace anpi
 
   // Tarea 4
   template<typename T,class Alloc>
-  std::vector<T> operator*(const Matrix<T,Alloc>& a,
-			   const std::vector<T>& b);
+  std::vector<size_t> operator*(const Matrix<T,Alloc>& a,
+			   const std::vector<size_t>& b);
   //@}
-  
+
 } // namespace ANPI
 
 // include the template implementations

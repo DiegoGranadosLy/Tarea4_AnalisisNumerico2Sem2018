@@ -133,6 +133,11 @@ namespace anpi {
     }
   }
 
+  /*
+  @brief : Metodo que calcula la matriz inversa a partir de la factorizacion LU.
+  @param inv: Matriz donde se almacenara el resultado.
+  @param LU : Matriz factorizada y obtenida de A.
+  */
   template<typename T>
   void luinv(Matrix<T>& inv, Matrix<T>& LU){
     std::vector<T> b;
@@ -147,8 +152,6 @@ namespace anpi {
       for(unsigned int j=0;j<LU.rows();++j){
         b[j] = (j == i) ? 1 : 0;
       }
-      // Resuelve el problema y obtiene la columna i de la inversa
-
       //Sustitucion hacia adelante
       for(unsigned int j=1;j<LU.rows();++j){    //Recorre columna
         for(unsigned int k=0;k<j;++k){          //Recorre fila

@@ -16,6 +16,11 @@
 #include "LUCrout.hpp"
 #include "QR.hpp"
 
+
+/*
+@brief Metodo utilizado para imprimir una matriz
+@param c: Matriz que se desea imprimir.
+*/
 template<class T>
 void imprimir(anpi::Matrix<T> c){
 	for (unsigned int i=0;i<c.rows();i++){
@@ -26,12 +31,31 @@ void imprimir(anpi::Matrix<T> c){
   }
 }
 
-void imprimir(std::vector<float> res){
+/*
+@brief Metodo utilizado para imprimir un vector transpuesto.
+@param res Vector que se desea imprimir
+*/
+void imprimir(std::vector<size_t> res){
 	for(unsigned int i=0;i<=res.size()-1;i++){
     	std::cout << res[i] << "	";
     }
     std::cout << "\n";
 }
+
+/*
+@brief Metodo que llama al metodo mas rapido segun
+       el punto 6 (grafico obtenido).Se utiliza el metodo de Crout.
+@param A : Matriz de constantes
+@param LU: Matriz con valores de L y U compactados en una sola matriz.
+@param p : Vector de soluciones a los que se desea conocer los x_i
+*/
+template<typename T>
+inline void lu(const anpi::Matrix<T>& A,const anpi::Matrix<T>& LU,std::vector<size_t>& p){
+  //Se llama al metodo de crout debido a que en el benchmark mostro ser mejor que
+  //el algoritmo de doolittle, es por ello que se llama a este metodo en lugar del otro.
+  anpi::luCrout(A,LU,p);
+}
+
 
 int main() {
 
@@ -45,8 +69,8 @@ int main() {
     std::cout << "   1) Doolittle." << std::endl;
     std::cout << "   2) Crout." << std::endl;
     std::cout << "   3) QR." << std::endl;
-    std::cout << "   4) Solve LU." << std::endl;
-    std::cout << "   5) Solve QR." << std::endl;
+    std::cout << "   4) Solve QR." << std::endl;
+    std::cout << "   5) Solve LU." << std::endl;
     std::cout << "   6) Salir." << std::endl;
 
     std::cout << std::endl << "Seleccione un metodo para correr: ";
@@ -96,7 +120,7 @@ int main() {
 
   
     switch (metodo) {
-      case 1:                                       //Doolittle
+      case 1:{                                       //Doolittle
         if (tipo == 0){   //Metodo Double
           std::cout << std::endl << " Doolitle double" << std::endl;
           anpi::Matrix<double>  LU;
@@ -122,8 +146,8 @@ int main() {
           std::cout << "\n\nValor de la inversa:\n";
           imprimir(inv);
         }
-        break;
-      case 2:                                       //Crout
+        break;}
+      case 2:{                                       //Crout
         if (tipo == 0){   //Metodo Double
           std::cout << std::endl << " Crout double" << std::endl;
           anpi::Matrix<double>  LU;
@@ -149,8 +173,8 @@ int main() {
           std::cout << "\n\nValor de la inversa:\n";
           imprimir(inv);
         }
-        break;
-      case 3:                                       //QR
+        break;}
+      case 3:{                                     //QR
         if (tipo == 0){   //Metodo Double
           std::cout << std::endl << " QR double" << std::endl;
           anpi::Matrix<double> Q;
@@ -174,21 +198,29 @@ int main() {
           std::cout << "\n\nValor de R:\n";
           imprimir(R);
         }
-        break;
-      case 4:                                       //Solve QR
+        break;}
+      case 4:{                                     //Solve QR
+        std::vector<size_t> b;
+        std::vector<size_t> x;
+        b.resize(dimension);
+        std::cout << "Ingrese los valores del vector b.\n";
+        for(unsigned int i=0;i<dimension;++i){
+            std::cout << "i:" << i << " = ";
+            std::cin  >> b[i];
+            std::cout << "\n";
+        }
         if (tipo == 0){   //Metodo Double
           std::cout << std::endl << " QR double" << std::endl;
-          anpi::Matrix<double> Q;
-          anpi::Matrix<double> R;
-          std::cout << std::endl << " Falta el solve QR double" << std::endl;
+          anpi::solveQR(AD,x,b);
         }else{            //Metodo float
           std::cout << std::endl << " QR double" << std::endl;
-          anpi::Matrix<float> Q;
-          anpi::Matrix<float> R;
-          std::cout << std::endl << " Falta el solve QR double" << std::endl;
+          anpi::solveQR(AF,x,b);
         }
-        break;
-      case 5:                                       //Solve LU
+        std::cout << "\n\nVector de soluciones\n";
+        imprimir(x);
+
+        break;}
+      case 5:{                                       //Solve LU
         if (tipo == 0){   //Metodo Double
           std::cout << std::endl << " Solve LU double" << std::endl;
           anpi::Matrix<double> LU;
@@ -198,7 +230,7 @@ int main() {
           anpi::Matrix<float> LU;
           std::cout << std::endl << " Falta el solve LU float" << std::endl;
         }
-        break;
+        break;}
       default:
         break;
     }

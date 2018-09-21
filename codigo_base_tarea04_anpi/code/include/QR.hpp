@@ -28,6 +28,8 @@ namespace anpi {
    */
   template<typename T>
   void transpose(anpi::Matrix<T>& Q,anpi::Matrix<T>& QT ){
+    QT.allocate(Q.rows(),Q.cols());
+    QT.fill(T(0));
     for(unsigned int i=0;i<Q.rows();++i){
       for(unsigned int j=0;j<Q.rows();++j){
         QT[i][j] = Q[j][i];
@@ -105,6 +107,33 @@ namespace anpi {
       res = Q*R;
     }else{
       throw anpi::Exception("Dimensiones incompatibles\n");
+    }
+  }
+
+  /**
+   * Transpose a matrix Q to QT
+   * @param[in]  Q : Matrix to transpose
+   * @param[out] QT: Matrix
+   *
+   */
+  template<typename T>
+  void solveQR(const anpi::Matrix<T>& A,std::vector<size_t>& x, const std::vector<size_t>& b){
+    anpi::Matrix<T> Q;
+    anpi::Matrix<T> R;
+    anpi::Matrix<T> QT;
+    std::vector<size_t>  temp;
+    x.resize(b.size());
+    anpi::qr(A,Q,R);
+    transpose(Q,QT);
+    temp = QT*b;
+    //Sustitucion hacia atras.
+    x[R.rows()-1] = temp[R.rows()-1]/R[R.rows()-1][R.rows()-1];
+    for(int j=R.rows()-2;j>=0;--j){
+      x[j] = temp[j];
+      for(int k=R.rows()-1;k>j;--k){
+        x[j]-=R[j][k]*x[k];
+      }
+      x[j] = x[j]/R[j][j];
     }
   }
 

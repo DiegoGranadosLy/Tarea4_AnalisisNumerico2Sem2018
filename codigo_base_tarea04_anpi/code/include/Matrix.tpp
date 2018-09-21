@@ -446,9 +446,9 @@ namespace anpi
 
   // TODO: Solucionar en la Tarea 04 (Punto 1)
   template<typename T,class Alloc>
-  std::vector<T> operator*(const Matrix<T,Alloc>& a, const std::vector<T>& b) {
+  std::vector<size_t> operator*(const Matrix<T,Alloc>& a, const std::vector<size_t>& b) {
     if (b.size()==a.cols()){
-      std::vector<T> res;
+      std::vector<size_t> res;
       for(unsigned int i=0;i<a.rows();++i){
         T temp = T(0);
         for(unsigned int j=0;j<b.size();++j){

@@ -307,10 +307,10 @@ BOOST_AUTO_TEST_CASE(Multiplication) {
       }
     }
 
-    std::vector<float> p    = {1,2,3};
-    std::vector<float> pp   = {1,2};
-    std::vector<float> pRes = {14,32};
-    std::vector<float> pR;
+    std::vector<size_t> p    = {1,2,3};
+    std::vector<size_t> pp   = {1,2};
+    std::vector<size_t> pRes = {14,32};
+    std::vector<size_t> pR;
     pR = a*p; //Multiplication made it. pR = a*p
     for(unsigned int i=0;i< pR.size();++i){
       BOOST_CHECK(pR[i]==pRes[i]);
@@ -350,9 +350,9 @@ BOOST_AUTO_TEST_CASE(QR){
   for (unsigned int i=0;i<I.rows();i++){    //Prueba para QT*Q = I
     for (unsigned int j=0;j<I.cols();j++){
       if(i!=j){
-        BOOST_CHECK((I[i][j]<0.0001)||(I[i][j]>-0.0001));   
+        BOOST_CHECK((I[i][j]<0.001)||(I[i][j]>-0.001));   
       }else{
-        BOOST_CHECK((I[i][j]<1.0001)||(I[i][j]>0.998));
+        BOOST_CHECK((I[i][j]<1.001)||(I[i][j]>0.998));
       }
     }
   }
@@ -360,7 +360,7 @@ BOOST_AUTO_TEST_CASE(QR){
   for (unsigned int i=0;i<R.rows();i++){    //Prueba para R = triangular superior
     for (unsigned int j=0;j<R.cols();j++){
       if(i>j){
-        BOOST_CHECK((I[i][j]<0.0001)||(I[i][j]>-0.0001));   
+        BOOST_CHECK((I[i][j]<0.001)||(I[i][j]>-0.001));   
       }
     }
   }
@@ -368,7 +368,7 @@ BOOST_AUTO_TEST_CASE(QR){
   Ar = Q*R;
   for (unsigned int i=0;i<A.rows();i++){    //A = Q*R
     for (unsigned int j=0;j<A.cols();j++){
-        BOOST_CHECK((A[i][j]<Ar[i][j]+0.0001)&&(A[i][j]>Ar[i][j]-0.0001));   
+        BOOST_CHECK((A[i][j]<Ar[i][j]+0.01)&&(A[i][j]>Ar[i][j]-0.01));   
     }
   }  
 }
